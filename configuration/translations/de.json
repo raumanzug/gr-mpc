@@ -1,0 +1,35 @@
+[
+    {
+        "cancel form": "Abbrechen"
+    },
+    {
+        "display name": "Anzeigename"
+    },
+    {
+        "dn already exists": "Anzeigename existiert schon."
+    },
+    {
+        "enter a password": "Gib ein Password an!"
+    },
+    {
+        "file": "Datei"
+    },
+    {
+        "host": "Host"
+    },
+    {
+        "password?": "Ein Password setzen?"
+    },
+    {
+        "port": "Port"
+    },
+    {
+        "program": "Derzeit im Programm"
+    },
+    {
+        "stations": "Stationen"
+    },
+    {
+        "submit form": "Speichern"
+    }
+]

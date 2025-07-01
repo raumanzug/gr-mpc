@@ -1,0 +1,35 @@
+[
+    {
+        "cancel form": "cancel"
+    },
+    {
+        "display name": "display name"
+    },
+    {
+        "dn already exists": "Display name already exists."
+    },
+    {
+        "enter a password": "Enter a password!"
+    },
+    {
+        "file": "File"
+    }
+    {
+        "host": "host"
+    },
+    {
+        "password?": "password?"
+    },
+    {
+        "port": "port"
+    },
+    {
+        "program": "Now playing"
+    },
+    {
+        "stations": "Stations"
+    },
+    {
+        "submit form": "submit"
+    }
+]
