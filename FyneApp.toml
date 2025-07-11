@@ -1,0 +1,8 @@
+[Details]
+  Name = "mpc"
+  ID = "org.gr.mpc"
+  Version = "0.0.1"
+  Build = 1
+
+[Migrations]
+  fyneDo = true

@@ -35,7 +35,7 @@ This client app is intended for use on android cell phones.
 
 * compile our app: `mpc.png` is image file of app icon.
 
-	fyne release -app-id org.gr.mpc -app-version 0.0.1 -app-build 1 -icon mpc.png -os android --key-store "${HOME}/gpsc.jks" --key-name gpsc
+	fyne release -icon mpc.png -os android --key-store "${HOME}/gpsc.jks" --key-name gpsc
 
 * extract `.apks` file from `.aab` file that we created when compiling
   our app:
