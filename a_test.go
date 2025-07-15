@@ -283,9 +283,87 @@ func TestA(t *testing.T) {
 		}
 	}
 
+	{
+		settingsButton := testUtils.ExtractSettingsButton(t)
+		if settingsButton == nil {
+			t.Error("no settings button found.")
+			return
+		}
+		fyneTest.Tap(settingsButton)
+	}
+
+	pForm = testUtils.ExtractForm(t)
+	if pForm == nil {
+		return
+	}
+
+	pEntry = testUtils.ExtractDNEntry(t, pForm)
+	if pEntry == nil {
+		return
+	}
+
+	if pEntry.Text != "big elephant" {
+		t.Error("dn entry should contain big elephant.")
+	}
+
+	if pForm.OnCancel == nil {
+		t.Error("cancel button should be enabled but is not.")
+	}
+
+	if pForm.OnSubmit == nil {
+		t.Error("submit button should be enabled but is not.")
+		return
+	}
+
+	{
+		fyneTest.Type(pEntry, "very ")
+		_, submitButton := testUtils.ExtractFormButtons(t, pForm)
+		fyneTest.Tap(submitButton)
+	}
+
+	testUtils.ExpectCloseEvent(
+		"big elephant",
+		state,
+	)
+
+	state = globals.ApplicationContext.ServerTabs().GetActivatedState(
+		"very big elephant",
+	)
+	if state == nil {
+		t.Error("state very big elephant is nil.")
+		return
+	}
+
+	testUtils.ExpectEventConnection[*testUtilsInterfaces.UpdateAllControlsEvent_t](
+		"very big elephant",
+		state,
+	)
+	testUtils.ExpectEventConnection[*testUtilsInterfaces.SetVolumeEvent_t](
+		"very big elephant",
+		state,
+	)
+
+	testUtils.AssertSelectedServerTabConsistency(t)
+	testUtils.AssertTabbedServicesConsistency(t)
+	testUtils.AssertTabbedServersContainsSelectedServerTab(t)
+	testUtils.AssertTabbedServersServerTabsServiceCoincidence(t)
+
+	{
+		servers, err := globals.ApplicationContext.Preferences().
+			TabbedServers()
+		if err != nil {
+			t.Error(err.Error())
+			return
+		}
+		if len(servers) != 1 {
+			t.Error("one server expected.")
+			return
+		}
+	}
+
 	// fyne does not call event handler when Remove/RemoveIndex method
 	// is called on DocTabs.
-	globals.ApplicationContext.UI().RemoveServerTab("big elephant")
+	globals.ApplicationContext.UI().RemoveServerTab("very big elephant")
 
 	pForm = testUtils.ExtractForm(t)
 	if pForm == nil {
@@ -367,7 +445,7 @@ func TestA(t *testing.T) {
 	testUtils.AssertTabbedServersServerTabsServiceCoincidence(t)
 
 	testUtils.ExpectCloseEvent(
-		"big elephant",
+		"very big elephant",
 		state,
 	)
 

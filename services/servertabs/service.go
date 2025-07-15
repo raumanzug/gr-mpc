@@ -73,6 +73,8 @@ func (pServerTabs *servertabs_t) markAsUnselected() (err error) {
 		state.Stop,
 	)()
 
+	pServerTabs.pMarkedTab = nil
+
 	return
 }
 
@@ -118,20 +120,11 @@ func (pServerTabs *servertabs_t) RemoveServerTabCallback(key string) (err error)
 		return
 	}
 
-	pNewTabItem := pServerTabs.context.UI().GetDocTabs().Selected()
-	if pNewTabItem == nil {
-		err = pServerTabs.markAsUnselected()
-		if err != nil {
-			return
-		}
-		err = pServerTabs.context.UI().UpdateScreen()
-		return
-	}
+	defer func() {
+		err = errors.Join(err, pServerTabs.markAsUnselected())
+	}()
 
-	err = pServerTabs.SelectCallback(pNewTabItem.Text)
-	if err != nil {
-		return
-	}
+	err = errors.Join(err, pServerTabs.context.UI().UpdateScreen())
 
 	return
 }
